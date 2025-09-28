@@ -25,16 +25,23 @@ class Graph{
     }
 
     containsSegment(segment){
-        return this.segments.find((s) => s.equals(seg));
+        return this.segments.find((s) => s.equals(segment));
     }
 
     tryAddSegment(segment){
-        if(!this.containsSegment(seg)){
-            this.addSegment(seg);
+        if(!this.containsSegment(segment) && !segment.p1.equals(segment.p2)){
+            this.addSegment(segment);
             return true;
         }
-            return false;
-        } 
+        return false;
+    } 
+
+    removeSegment(segment){
+    const index = this.segments.findIndex(s => s.equals(segment));
+    if(index !== -1){
+        this.segments.splice(index, 1);
+    }
+}
 
     draw(ctx){
         for(const seg of this.segments){
